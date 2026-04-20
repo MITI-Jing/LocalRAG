@@ -1,0 +1,13 @@
+chromadb==0.6.3
+sentence-transformers==4.1.0
+rank-bm25==0.2.2
+beautifulsoup4==4.13.4
+requests==2.32.3
+tiktoken==0.9.0
+matplotlib==3.10.1
+jupyter==1.1.1
+langchain==0.0.148
+langchain_community==0.0.3
+openai==1.80.0
+python-dotenv==1.0.0
+pymupdf==1.27.2.2
