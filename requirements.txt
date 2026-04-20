@@ -6,8 +6,10 @@ requests==2.32.3
 tiktoken==0.9.0
 matplotlib==3.10.1
 jupyter==1.1.1
-langchain==0.0.148
-langchain_community==0.0.3
+langchain==0.3.0
+langchain_community==0.3.0
 openai==1.80.0
 python-dotenv==1.0.0
 pymupdf==1.27.2.2
+pymupdf4llm==0.0.1
+langchain-text-splitters==0.3.0
