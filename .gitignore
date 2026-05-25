@@ -6,10 +6,10 @@ __pycache__/
 chroma_db/
 *.faiss
 .venv/
-venv/
 libraries.md
 Lessonlearned.md
 investigate_later.md
 localrag_ingestion with langchain pymupdfloader.ipynb
 postlinkedin.md
 .claude/
+.vscode/
