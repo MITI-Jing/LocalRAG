@@ -1,0 +1,6 @@
+{"id": "Q01", "type": "definition", "judge_prompt_v": "v2", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0, "reason": "The system's answer accurately and completely reflects the ground truth."}
+{"id": "Q02", "type": "definition", "judge_prompt_v": "v2", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0, "reason": "The system's answer is a direct and accurate paraphrase of the ground truth."}
+{"id": "Q03", "type": "definition", "judge_prompt_v": "v2", "faithfulness": 1.0, "correctness": 0.0, "completeness": 0.0, "reason": "deterministic: abstained on answerable question"}
+{"id": "Q04", "type": "definition", "judge_prompt_v": "v2", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0, "reason": "The system accurately retrieved and reproduced the definition of the 'lost in the middle' effect from the provided context."}
+{"id": "Q05", "type": "definition", "judge_prompt_v": "v2", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0, "reason": "The answer accurately and completely reflects the ground truth."}
+{"id": "Q06", "type": "definition", "judge_prompt_v": "v2", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0, "reason": "The system's answer is a semantic equivalent of the ground truth and is supported by the provided context."}

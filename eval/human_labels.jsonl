@@ -1,17 +1,20 @@
-{"id": "Q03", "faithfulness": 0.0, "correctness": 0.0, "completeness": 0.0}
-{"id": "Q07", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
-{"id": "Q08", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
-{"id": "Q14", "faithfulness": 0.5, "correctness": 0.8, "completeness": 0.8}
-{"id": "Q17", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
-{"id": "Q21", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
-{"id": "Q22", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
-{"id": "Q24", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
-{"id": "Q28", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
-{"id": "Q33", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
-{"id": "Q34", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
-{"id": "Q37", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
-{"id": "Q39", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
-{"id": "Q40", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
-{"id": "Q41", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
-{"id": "Q45", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
-{"id": "Q46", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
+{"id": "Q03","type": "definition",  "faithfulness": 1.0, "correctness": 0.0, "completeness": 0.0}
+{"id": "Q04","type": "definition", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
+{"id": "Q07","type": "definition", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
+{"id": "Q08","type": "definition", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
+{"id": "Q14","type": "enumeration", "faithfulness": 1.0, "correctness": 0.0, "completeness": 0.0}
+{"id": "Q17","type": "enumeration", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
+{"id": "Q21","type": "enumeration", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
+{"id": "Q22","type": "enumeration", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
+{"id": "Q24","type": "enumeration", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
+{"id": "Q27","type": "indirect", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
+{"id": "Q28","type": "indirect", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
+{"id": "Q30","type": "indirect","faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
+{"id": "Q33","type": "indirect","faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
+{"id": "Q34","type": "indirect","faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
+{"id": "Q37","type": "negation","faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
+{"id": "Q39","type": "negation", "faithfulness": 1.0, "correctness": 0.0, "completeness": 0.0}
+{"id": "Q40","type": "negation", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
+{"id": "Q41","type": "negation", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
+{"id": "Q45","type": "negation", "faithfulness": 1.0, "correctness": 0.0, "completeness": 0.0}
+{"id": "Q46","type": "negation", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
