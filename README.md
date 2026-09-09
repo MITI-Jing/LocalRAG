@@ -1,5 +1,8 @@
 # LocalRAG
 
+[![tests](https://github.com/MITI-Jing/LocalRAG/actions/workflows/tests.yml/badge.svg)](https://github.com/MITI-Jing/LocalRAG/actions/workflows/tests.yml)
+
+
 A fully local RAG pipeline. No cloud calls anywhere in the inference path or eval loop. Embedding, retrieval, generation, and judging all run on local models via Ollama and sentence-transformers.
 
 I'm building this in public on LinkedIn while moving toward production-grade agentic.
@@ -45,14 +48,7 @@ eval (offline batch)
 **Single PDF for now.** Production-grade means an ingestion pipeline for N documents; I'm staying single-doc until the agentic and eval layers are solid, then scaling the corpus.
 
 
-## Roadmap to production-grade agentic
 
-1. RAGAS-based scoring on the cross-model judge for reproducible metrics.
-2. Notebook to FastAPI service, Dockerised, env-config, basic auth.
-3. LangFuse for tracing every retrieval and generation step, latency breakdown, eval scoring over time.
-4. Agentic layer: query router (does this need retrieval?), query decomposition for multi-hop, tool use beyond retrieval.
-5. Multi-document ingestion pipeline with reprocessing logic.
-6. CI-triggered regression eval on every commit, with results posted to PR.
 
 ## Run it
 

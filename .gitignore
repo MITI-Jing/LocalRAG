@@ -6,6 +6,13 @@ __pycache__/
 chroma_db/
 *.faiss
 .venv/
+
+#build + tool caches(from src layout and pytest)
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+#working notes
 libraries.md
 Lessonlearned.md
 investigate_later.md
@@ -13,3 +20,6 @@ localrag_ingestion with langchain pymupdfloader.ipynb
 postlinkedin.md
 .claude/
 .vscode/
+interview_qa.md
+DESIGN.md
+PRODUCTION_GAP_PLAN.md
