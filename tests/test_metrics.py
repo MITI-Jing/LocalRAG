@@ -2,7 +2,6 @@
 
 from localrag.metrics import chunk_contains_quote, normalize, recall_at_k, reciprocal_rank
 
-
 class TestReciprocalRank:
     def test_gold_at_first_position(self):
         assert reciprocal_rank(["gold", "b", "c"], ["gold"]) == 1.0
@@ -45,30 +44,30 @@ class TestRecallAtK:
         assert recall_at_k(["a", "b"], [], k=5) == 0.0
 
 
-    class TestNormalize:
-        def test_strips_markdown_emphasis(self):
-            assert normalize("**Claude _Architect_") == "claude_architect"
+class TestNormalize:
+    def test_strips_markdown_emphasis(self):
+            assert normalize("**Claude _Architect_") == "claude architect"
 
 
     def test_collapses_newlines_and_runs_of_spaces(self):
         assert normalize("line one\n\n  line two") == "line one line two"
 
     def test_strips_heading_markers_and_backticks(self):
-        assert normalize("## 'Overview'") == "overview"
+        assert normalize("## `Overview`") == "overview"
 
 
-    class TestChunkContainsQuote:
-        def test_matches_across_markdown_and_line_breaks(self):
-            # The reason normalize() exists: this quote is one sentence in the PDF but
-            # arrives from pymupdf4llm split by a heading, a bold run and a newline.
+class TestChunkContainsQuote:
+    def test_matches_across_markdown_and_line_breaks(self):
+        # The reason normalize() exists: this quote is one sentence in the PDF but
+        # arrives from pymupdf4llm split by a heading, a bold run and a newline.
 
-            chunk = "## Overview\nThe **Foundations** certification   validates\ntradeoffs."
-            quote = "The Foundations certification validates tradeoffs."
-            assert chunk_contains_quote(chunk, quote)
+        chunk = "## Overview\nThe **Foundations** certification   validates\ntradeoffs."
+        quote = "The Foundations certification validates tradeoffs."
+        assert chunk_contains_quote(chunk, quote)
 
-        def test_absent_quote_is_false(self):
-            assert not chunk_contains_quote("Some other text.", "Foundations certification")
-            
+    def test_absent_quote_is_false(self):
+        assert not chunk_contains_quote("Some other text.", "Foundations certification")
+
 
 
 

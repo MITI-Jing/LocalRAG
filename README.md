@@ -73,7 +73,7 @@ jupyter notebook localrag_ingestion.ipynb
 - **Judge:** gemma2:9b via Ollama
 - **Doc loader:** pymupdf4llm (after pymupdf created chunk boundary issues at page breaks)
 - **Orchestration:** LangChain
-- **Eval:** custom typed test set + RAGAS (in progress)
+- **Eval:** custom typed test set, hand-built retrieval metrics, cross-model LLM judge
 
 ## Files in this repo
 
