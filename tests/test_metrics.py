@@ -1,6 +1,8 @@
-"""Unit tests for the retrieval metrics every commited eval number dpends on."""
+"""Unit tests for the retrieval metrics every committed eval number depends on."""
+
 
 from localrag.metrics import chunk_contains_quote, normalize, recall_at_k, reciprocal_rank
+
 
 class TestReciprocalRank:
     def test_gold_at_first_position(self):
