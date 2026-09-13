@@ -23,7 +23,9 @@ def build_index(pdf_path: Path, persist_dir: Path = Path("chroma_db")) -> int:
     """
 
     if persist_dir.exists():
-        raise FileExistsError({f"{persist_dir} already exists - delete it first to rebuild"})
+        raise FileExistsError(
+            f"{persist_dir} already exists - delete it first to rebuild"
+            )
 
     chunks = chunk_recursive_with_breadcrumbs(split_by_headers(load_markdown(pdf_path)))
     Chroma.from_documents(

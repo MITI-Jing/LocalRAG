@@ -1,11 +1,11 @@
 """ PDF -> markdown -> header sections -> breadcrumbed chunks. No models, no index."""
 
-from langchain_text_splitters import RecursiveCharacterTextSplitter,MarkdownHeaderTextSplitter
+import re
 from pathlib import Path
+
 import pymupdf4llm
 from langchain_core.documents import Document
-import re
-
+from langchain_text_splitters import MarkdownHeaderTextSplitter, RecursiveCharacterTextSplitter
 
 HEADERS_TO_SPLIT_ON = [("##", "H2"), ("###", "H3")]
 

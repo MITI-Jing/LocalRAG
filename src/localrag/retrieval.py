@@ -1,27 +1,26 @@
 """Query-time retrievers, all built from the persisted Chroma collection."""
 
-from langchain.retrievers.ensemble import EnsembleRetriever
-from langchain_core.documents import Document
-from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_chroma import Chroma
-from langchain_community.retrievers import BM25Retriever
-from langchain.retrievers.ensemble import EnsembleRetriever
-from langchain.retrievers.document_compressors import CrossEncoderReranker
-from langchain_community.cross_encoders import HuggingFaceCrossEncoder
-from langchain.retrievers import ContextualCompressionRetriever
-from langchain_core.retrievers import BaseRetriever
 from pathlib import Path
 
+from langchain.retrievers import ContextualCompressionRetriever
+from langchain.retrievers.document_compressors import CrossEncoderReranker
+from langchain.retrievers.ensemble import EnsembleRetriever
+from langchain_chroma import Chroma
+from langchain_community.cross_encoders import HuggingFaceCrossEncoder
+from langchain_community.retrievers import BM25Retriever
+from langchain_core.documents import Document
+from langchain_core.retrievers import BaseRetriever
+from langchain_huggingface import HuggingFaceEmbeddings
 
 COLLECTION = "md_chunks_breadcrumb"
 EMBED_MODEL ="sentence-transformers/all-MiniLM-L6-v2"
 CROSS_ENCODER_MODEL ="BAAI/bge-reranker-base"
 
-def load_vectorestore(persist_dir: Path= "./chroma_db") -> Chroma:
+def load_vectorstore(persist_dir: Path = Path("chroma_db")) -> Chroma:
     """Open the existing index. Never builds one - that is ingest.build_index's job."""
     if not persist_dir.exists():
         raise FileNotFoundError(
-            f"No indext at {persist_dir} - build one with `python -m localrag.ingest`"
+            f"No index at {persist_dir} - build one with `python -m localrag.ingest`"
         )
     return Chroma(
         collection_name=COLLECTION,
@@ -47,10 +46,12 @@ def dense_retriever(vectorstore: Chroma, k:int = 10) -> BaseRetriever:
 
 
 def bm25_retriever(chunks: list[Document], k: int = 10) -> BaseRetriever:
-    return BM25Retriever.from_documents(chunks=chunks, k=k)
+    return BM25Retriever.from_documents(chunks, k=k)
 
 
-def hybrid_retriever(dense: BaseRetriever, bm25: BaseRetriever, weights: tuple[float, float] = (0.3, 0.7)) -> BaseRetriever:
+def hybrid_retriever(
+        dense: BaseRetriever, bm25: BaseRetriever, 
+        weights: tuple[float, float] = (0.3, 0.7)) -> BaseRetriever:
     """Weighted reciprocal-rank fusion of dense + BM25; BM25 weighted heavier."""
 
     return EnsembleRetriever(retrievers=[dense, bm25], weights=list(weights))
