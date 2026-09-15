@@ -9,7 +9,7 @@ silently attributes scores to the wrong question - these tests fail instead.
 import json
 from collections import Counter
 from pathlib import Path
-
+import re
 import pytest
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -67,3 +67,9 @@ def test_no_answer_rows_carry_no_gold_chunks(rows):
     for row in (r for r in rows if r["type"] == "no_answer"):
         assert not row["ground_truth_chunk_ids"], f"{row['id']} should have no gold chunk ids"
 
+def test_gold_ids_are_deterministic_chunk_ids(rows):
+    """build_index names chunks chunk-0000, chunk-0001, ... so a fresh clone reproduces them."""
+    for row in rows:
+        for cid in row["ground_truth_chunk_ids"]:
+            assert re.fullmatch(r"chunk-\d{4}", cid), f"{row['id']} has non-deterministic id {cid}"
+            

@@ -16,12 +16,22 @@ import html
 from pathlib import Path
 
 EVAL = Path(__file__).parent
-TYPE_ORDER = ["definition", "enumeration", "indirect", "negation"]
 SYSTEMS = ["dense", "bm25", "hybrid", "reranked"]
 
 
 def load_jsonl(name):
-    return [json.loads(line) for line in (EVAL / name).open(encoding="utf-8")]
+    """One JSON object per line. A malformed line is reported and skipped, not fatal."""
+
+    rows = []
+    with (EVAL / name).open(encoding="utf-8") as f:
+        for n, line in enumerate(f, start=1):
+            if not line.strip():
+                continue
+            try:
+                rows.append(json.loads(line))
+            except json.JSONDecodedError as e:
+                print(f"skipping {name} line {n}: {e}")
+    return rows
 
 
 def build_rows():
@@ -37,15 +47,17 @@ def build_rows():
         if key not in latest or d["date"] >= latest[key]["date"]:
             latest[key] = d
 
-    # retrieval[qid][system] = {"rr":, "rk":}
+    # retrieval[qid][system] = {"qid":, "rr":, "rk":}, joined on the qid each cell carriers.
     retrieval = {}
     for system, d in latest.items():
-        for qtype in TYPE_ORDER:
-            block = d["per_type"][qtype]
-            start = TYPE_ORDER.index(qtype) * 12  # 12 questions per type
-            for i, cell in enumerate(block["raw"]):
-                qid = f"Q{start + i + 1:02d}"
-                retrieval.setdefault(qid, {})[system] = cell
+        for block in d["per_type"].values():
+            for cell in block["raw"]:
+                if "qid" not in cell:
+                    raise SystemExit(
+                        f"latest '{system}' record ({d['date']}) has no qid in its raw cells -"
+                        "re-run `python -m localrag.evaluate`"
+                    )
+                retrieval.setdefault(cell["qid"], {})[system] = cell
 
     rows = []
     for n in range(1, 49):

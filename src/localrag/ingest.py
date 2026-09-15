@@ -28,6 +28,9 @@ def build_index(pdf_path: Path, persist_dir: Path = Path("chroma_db")) -> int:
             )
 
     chunks = chunk_recursive_with_breadcrumbs(split_by_headers(load_markdown(pdf_path)))
+    for chunk in chunks:
+        chunk.metadata["source_doc"] = pdf_path.name
+
     Chroma.from_documents(
         chunks,
         HuggingFaceEmbeddings(model_name=EMBED_MODEL),
