@@ -1,16 +1,18 @@
 """Query-time retrievers, all built from the persisted Chroma collection."""
 
+import chromadb
+from langchain.retrievers.ensemble import EnsembleRetriever
+from langchain_core.documents import Document
+from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_chroma import Chroma
+from langchain_community.retrievers import BM25Retriever
+from langchain.retrievers.document_compressors import CrossEncoderReranker
+from langchain_community.cross_encoders import HuggingFaceCrossEncoder
+from langchain.retrievers import ContextualCompressionRetriever
+from langchain_core.retrievers import BaseRetriever
 from pathlib import Path
 
-from langchain.retrievers import ContextualCompressionRetriever
-from langchain.retrievers.document_compressors import CrossEncoderReranker
-from langchain.retrievers.ensemble import EnsembleRetriever
-from langchain_chroma import Chroma
-from langchain_community.cross_encoders import HuggingFaceCrossEncoder
-from langchain_community.retrievers import BM25Retriever
-from langchain_core.documents import Document
-from langchain_core.retrievers import BaseRetriever
-from langchain_huggingface import HuggingFaceEmbeddings
+
 
 COLLECTION = "md_chunks_breadcrumb"
 EMBED_MODEL ="sentence-transformers/all-MiniLM-L6-v2"
@@ -40,6 +42,16 @@ def load_chunks(vectorestore: Chroma) -> list[Document]:
         )
     ]
 
+def count_chunks(persist_dir: Path = Path("chroma_db")) -> int:
+    """Live chunk count from Chroma, without loading the embedding model. 0 if no index."""
+    if not persist_dir.exists(): 
+        return 0
+
+    try:
+        return chromadb.PersistentClient(path=str(persist_dir)).get_collection(COLLECTION).count()
+
+    except Exception:
+        return 0
 
 def dense_retriever(vectorstore: Chroma, k:int = 10) -> BaseRetriever:
     return vectorstore.as_retriever(search_kwargs={"k": k})

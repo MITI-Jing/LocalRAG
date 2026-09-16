@@ -1,0 +1,23 @@
+# First run:  docker compose up --build
+# Then once:  docker compose exec ollama ollama pull qwen2.5:7b
+# /health returns 503 until the model is pulled - that is the health check doing its job.
+services:
+  ollama:
+    image: ollama/ollama:0.24.0   # same version as the local install
+    volumes:
+     - ollama-models:/root/.ollama
+     # no published port: the host's own Ollama already owns 11434
+
+  api:
+    build:
+    ports:
+      - "8000:8000"
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+      LOCALRAG_GEN_TIMEOUT_S: "120"
+    depends_on:
+      - ollama
+
+
+  volumes:
+    ollama-models:   

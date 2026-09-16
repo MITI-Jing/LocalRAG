@@ -1,0 +1,14 @@
+.git
+.github
+.venv
+.claude
+.vscode
+.env
+**/__pycache__
+.pytest_cache
+.ruff_cache
+.crhoma_db*
+eval
+tests
+*.ipynb
+*.md

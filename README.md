@@ -55,11 +55,14 @@ eval (offline batch)
 ```bash
 git clone https://github.com/MITI-Jing
 cd LocalRAG
-python -m venv .venv
+python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
 source .venv/bin/activate  # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
+pip install -e ".[dev]"
 ollama pull qwen2.5:7b llama3.1:8b gemma2:9b
-jupyter notebook localrag_ingestion.ipynb
+python -m localrag.ingest       # build chroma_db/ with chunk-0000 ....
+python -m localrag.evaluate     # reproduces the retrieval table
+uvicorn localrag.api:app --port 8000
+# or: docker compose up --build
 ```
 
 
