@@ -21,9 +21,9 @@ RUN python -m localrag.ingest \
 
 # Everything is on disk - forbid runtime downloads.
 
-ENV HF_HUB_OFFLINE=1 TRANFORMERS_OFFLINE=1
+ENV HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 
 EXPOSE 8000
-CMD ["uvicorn", "localrag.api:api", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "localrag.api:app", "--host", "0.0.0.0", "--port", "8000"]
 
 

@@ -9,7 +9,7 @@ services:
      # no published port: the host's own Ollama already owns 11434
 
   api:
-    build:
+    build: .
     ports:
       - "8000:8000"
     environment:
@@ -19,5 +19,5 @@ services:
       - ollama
 
 
-  volumes:
-    ollama-models:   
+volumes:
+  ollama-models:

@@ -183,7 +183,7 @@ def create_app(services_factory: Callable[[], Services] = default_services) -> F
         tokens = TokenUsage(
             input=usage.get("input_tokens", 0), output=usage.get("output_tokens", 0)
         )
-        abstained = pipeline.is_abstained(reply.content)
+        abstained = pipeline.is_abstention(reply.content)
         log_event(
             "generate", trace_id, ms=generate_ms, input_tokens=tokens.input,
             output_tokens=tokens.output, abstained=abstained,

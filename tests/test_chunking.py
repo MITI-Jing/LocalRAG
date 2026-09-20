@@ -25,5 +25,5 @@ def test_chunk_size_limits_the_body_not_the_breadcrumb():
 
 def test_text_before_first_heading_gets_an_empt_breadcrumb():
     """In the real index this is the document title - H1 is no a split level."""
-    first, *_ = chunk("Preamble text. \n## Domain 1\n\Some text.")
+    first, *_ = chunk("Preamble text. \n## Domain 1\n\nSome text.")
     assert first.page_content == "Section: \n\nPreamble text."

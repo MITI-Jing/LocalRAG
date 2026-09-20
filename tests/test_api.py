@@ -54,7 +54,7 @@ def client_for(llm, docs=DOCS, indexed=True, ollama=(True, True), retriever=None
     return TestClient(create_app(lambda: services))
 
 def ask(client, **body):
-    return client.post("/ask", json={"question": "What does the exam cover?" **body})
+    return client.post("/ask", json={"question": "What does the exam cover?", **body})
 
 def test_ask_returns_answer_sources_and_measurements():
     with client_for(FakeLLM("The exam covers five domains.")) as client:
@@ -79,7 +79,7 @@ def test_abstention_is_flagged():
     with client_for(FakeLLM("Not found in context.")) as client:
         assert ask(client).json()["abstained"] is True
 
-@pytest.mark.parameterize(
+@pytest.mark.parametrize(
     "body",
     [
         {"question": "hi"},
@@ -120,7 +120,7 @@ def test_ollama_down_retries_once_then_503():
     assert llm.calls == 2
 
 def test_ollama_blip_recovers_on_the_retry():
-    llm = FakeLLM(httpx.ConnectError("refused"), "Recoverd answer.")
+    llm = FakeLLM(httpx.ConnectError("refused"), "Recovered answer.")
     with client_for(llm) as client:
         r = ask(client)
     assert r.status_code == 200

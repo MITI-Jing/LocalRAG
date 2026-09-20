@@ -56,8 +56,8 @@ def build_prompt(question: str, docs: list[Document]) -> str:
         " include EVERY relevant item from the context — do not summarise or pick representatives."
         " Only when NO source contains anything relevant to the question,reply exactly:"
         " Not found in context."
-        "Sources:\n{context}\n\n"
-        "Question: {question}\n\n"
+        f"Sources:\n{context}\n\n"
+        f"Question: {question}\n\n"
         "Answer:\n"
     )
 
