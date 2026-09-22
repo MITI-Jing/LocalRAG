@@ -39,7 +39,7 @@ eval (offline batch)
 
 ## Why these design choices
 
-**Hybrid retrieval + reranker.** Semantic search misses on enumeration and negation queries where lexical overlap matters; BM25 catches those. RRF fusion then bge-reranker-base gave the biggest single jump (0.76 to 0.87 overall MRR) for moderate complexity.
+**Hybrid retrieval + reranker.** Semantic search misses on enumeration and negation queries where lexical overlap matters; BM25 catches those. RRF fusion then bge-reranker-base took overall MRR from 0.72 (dense alone) to 0.87 — the largest gain of any single change, for moderate complexity.
 
 **Cross-model LLM-as-judge.** Same-model judging inflates scores because the judge agrees with its own output. Using a different model family for the judge removes that. Even a same-class local model is a defensible judge once you give it the ground-truth answer as an answer key.
 
@@ -49,6 +49,22 @@ eval (offline batch)
 
 
 
+
+## Retrieval results
+
+48 answerable questions at k=5 (the 12 `no_answer` rows carry no gold chunk and are excluded). Reproduce with `python -m localrag.evaluate`.
+
+|                        | dense  | bm25   | hybrid | reranked   |
+| ---------------------- | ------ | ------ | ------ | ---------- |
+| **MRR**                | 0.7167 | 0.6719 | 0.7917 | **0.8681** |
+| **Recall@5**           | 0.8542 | 0.8542 | 0.9167 | **0.9375** |
+| Questions hit (of 48)  | 41     | 41     | 44     | **45**     |
+| MRR — definition       | 0.8333 | 0.7917 | 0.8333 | 0.7778     |
+| MRR — enumeration      | 0.7083 | 0.5139 | 0.7778 | 0.8194     |
+| MRR — indirect         | 0.5333 | 0.7292 | 0.8611 | 0.9583     |
+| MRR — negation         | 0.7917 | 0.6528 | 0.6944 | 0.9167     |
+
+Dense and BM25 tie on Recall@5 — 41/48 each — but fail on *different* questions, which is what makes fusing them worth the complexity. Reranking then adds just one question of recall (44 → 45) while moving MRR 0.79 → 0.87: it reorders the pool rather than widening it. The honest regression: definition MRR drops 0.8333 → 0.7778 under reranking.
 
 ## Run it
 
@@ -81,9 +97,9 @@ uvicorn localrag.api:app --port 8000
 ## Files in this repo
 
 - `localrag_ingestion.ipynb` — main pipeline (ingestion through generation)
-- `eval/eval_testset_v1.jsonl` — 60-question typed eval set with ground-truth chunk IDs
+- `eval/eval_testset_v1.jsonl` — 60-question typed eval set with ground-truth chunk IDs (48 answerable, scored; 12 `no_answer`)
 - `eval/eval testset prompt.md` — the prompt used to seed the test set (one cloud call, hand-reviewed)
-- `eval/results_baseline.jsonl` — current baseline retrieval results
+- `eval/results_retrieval.jsonl` — every retrieval eval run, appended (never overwritten)
 
 
 ## Limitations

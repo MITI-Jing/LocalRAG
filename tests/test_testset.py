@@ -7,9 +7,10 @@ silently attributes scores to the wrong question - these tests fail instead.
 """
 
 import json
+import re
 from collections import Counter
 from pathlib import Path
-import re
+
 import pytest
 
 REPO_ROOT = Path(__file__).resolve().parents[1]

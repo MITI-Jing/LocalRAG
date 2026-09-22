@@ -2,6 +2,7 @@
 
 from localrag.chunking import chunk_recursive_with_breadcrumbs, split_by_headers
 
+
 def chunk(md: str, **kwargs):
     return chunk_recursive_with_breadcrumbs(split_by_headers(md), **kwargs)
 

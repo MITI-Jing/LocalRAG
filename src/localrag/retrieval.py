@@ -1,18 +1,17 @@
 """Query-time retrievers, all built from the persisted Chroma collection."""
 
-import chromadb
-from langchain.retrievers.ensemble import EnsembleRetriever
-from langchain_core.documents import Document
-from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_chroma import Chroma
-from langchain_community.retrievers import BM25Retriever
-from langchain.retrievers.document_compressors import CrossEncoderReranker
-from langchain_community.cross_encoders import HuggingFaceCrossEncoder
-from langchain.retrievers import ContextualCompressionRetriever
-from langchain_core.retrievers import BaseRetriever
 from pathlib import Path
 
-
+import chromadb
+from langchain.retrievers import ContextualCompressionRetriever
+from langchain.retrievers.document_compressors import CrossEncoderReranker
+from langchain.retrievers.ensemble import EnsembleRetriever
+from langchain_chroma import Chroma
+from langchain_community.cross_encoders import HuggingFaceCrossEncoder
+from langchain_community.retrievers import BM25Retriever
+from langchain_core.documents import Document
+from langchain_core.retrievers import BaseRetriever
+from langchain_huggingface import HuggingFaceEmbeddings
 
 COLLECTION = "md_chunks_breadcrumb"
 EMBED_MODEL ="sentence-transformers/all-MiniLM-L6-v2"

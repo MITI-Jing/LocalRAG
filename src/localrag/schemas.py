@@ -1,4 +1,7 @@
-"""The API boudary as types. FastAPI validates requests against them(422) and documents both at /docs."""
+"""The API boudary as types. 
+
+FastAPI validates requests against them(422) and documents both at /docs.
+ """
 
 from typing import Literal
 

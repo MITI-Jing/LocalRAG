@@ -1,5 +1,6 @@
-"""Query path: retriever + prompt + LLM. The API calls each stage separately so it can time them;
-batch scripts call answer()."""
+"""Query path: retriever + prompt + LLM. The API calls each stage 
+separately so it can time them;batch scripts call answer().
+"""
 
 from pathlib import Path
 
@@ -18,6 +19,7 @@ from localrag.retrieval import (
     reranked_retriever,
 )
 
+GEN_PROMPT_V = "v3"
 GEN_MODEL = "qwen2.5:7b"
 ABSTAIN_PHRASE = "not found in context" # the rule the judge uses
 
@@ -41,10 +43,14 @@ def build_retriever(persist_dir: Path= Path("chroma_db"), top_n: int = 5) -> Bas
     bm25 = bm25_retriever(chunks)
     return reranked_retriever(hybrid_retriever(dense, bm25), top_n=top_n)
 
+def format_context(docs: list[Document]) -> str:
+    """The sources block exactly as the generator sees it; the judge grades aginst this text."""
+    return "\n\n".join(f"[SOURCE {i + 1}]:\n{doc.page_content}" for i, doc in enumerate(docs))
+
 
 def build_prompt(question: str, docs: list[Document]) -> str:
     """The v3 generation prompt, verbatim. Changing this text makes it a new prompt version."""
-    context = "\n\n".join(f"[SOURCE {i + 1}]:\n{doc.page_content}" for i, doc in enumerate(docs))
+    context = format_context(docs)
     return(
         " Answer the question using only the provided context."
         " If ANY source contains information relevant to the question, you MUST answer from it."
@@ -73,4 +79,5 @@ def answer(question: str, retriever:BaseRetriever, llm:ChatOllama) -> dict:
         "result": response.content,
         "source_documents": docs,
     }
+
 

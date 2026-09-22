@@ -32,7 +32,6 @@ from localrag.errors import (
     OllamaUnavailable,
     RetrievalError,
 )
-
 from localrag.retrieval import count_chunks
 from localrag.schemas import (
     MAX_K,

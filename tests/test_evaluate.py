@@ -4,6 +4,7 @@ from langchain_core.documents import Document
 
 from localrag.evaluate import evaluate
 
+
 class FakeRetriever:
     def __init__(self, ranking: dict[str, list[str]]):
         self.ranking = ranking
