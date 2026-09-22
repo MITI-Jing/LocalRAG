@@ -8,7 +8,6 @@ from langchain_core.documents import Document
 from langchain_core.retrievers import BaseRetriever
 from langchain_ollama import ChatOllama
 
-
 from localrag.errors import EmptyCorpusError
 from localrag.retrieval import (
     bm25_retriever,

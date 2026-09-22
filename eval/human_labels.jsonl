@@ -16,5 +16,6 @@
 {"id": "Q39","type": "negation", "faithfulness": 1.0, "correctness": 0.0, "completeness": 0.0}
 {"id": "Q40","type": "negation", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
 {"id": "Q41","type": "negation", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
+{"id": "Q42","type": "negation", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}
 {"id": "Q45","type": "negation", "faithfulness": 1.0, "correctness": 0.0, "completeness": 0.0}
 {"id": "Q46","type": "negation", "faithfulness": 1.0, "correctness": 1.0, "completeness": 1.0}

@@ -4,15 +4,13 @@
 
 import argparse
 import json
-import os
 from pathlib import Path
 from statistics import mean
+
 from langchain_core.exceptions import OutputParserException
 
 from localrag.evaluate import TESTSET
-
 from localrag.judge import JUDGE_MODEL, JUDGE_PROMPT_V, grade
-from localrag.schemas import AskRequest 
 from localrag.pipeline import (
     GEN_MODEL,
     GEN_PROMPT_V,
@@ -22,6 +20,7 @@ from localrag.pipeline import (
     format_context,
     is_abstention,
 )
+from localrag.schemas import AskRequest
 
 RUNS = Path("eval/runs")
 METRICS = ("faithfulness", "correctness", "completeness")
